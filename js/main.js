@@ -210,15 +210,11 @@ function goToSection(id) {
                 vid.play().catch(e => console.log("Video Play Error", e));
             }
 
-            // Function to advance to next video or next section
+            // Function to advance to next video or loop
             function nextVideo() {
                 currentVideoIndex++;
                 if (currentVideoIndex >= videoPlaylist.length) {
-                    if (!navTriggered) {
-                        navTriggered = true;
-                        goToSection('anime');
-                    }
-                    return;
+                    currentVideoIndex = 0; // Loop back to the first video
                 }
                 loadVideo(currentVideoIndex);
             }
@@ -275,8 +271,13 @@ function goToSection(id) {
     }
 
     // Section specific logic
-    if (id === 'anime') startAnimeSequence();
-    if (id === 'family') setTimeout(() => showNextButton('final'), 5000);
+    if (id === 'tulips') {
+        // Re-initialize animations to make it feel fresh
+        setTimeout(() => {
+            initTulipAnimations();
+            startFallingPetals();
+        }, 100);
+    }
 }
 
 // --- SPECIFIC SECTION LOGIC ---
@@ -295,145 +296,15 @@ function interactCat(text) {
     showNextButton('video');
 }
 
-// ANIME
-function startAnimeSequence() {
-    // Initialize snow animation for anime section
-    setupAnimeSnow();
-
-    // Initialize colorful hearts animation
-    setupAnimeHearts();
-
-    // Show next button after 8 seconds
-    setTimeout(() => {
-        showNextButton('family');
-    }, 8000);
-}
-
-// Anime Snow Animation
-function setupAnimeSnow() {
-    const canvas = document.getElementById('anime-snow-canvas');
-    if (!canvas) return;
-
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-    const ctx = canvas.getContext('2d');
-
-    const snowflakes = [];
-    const snowflakeCount = 100;
-
-    // Create snowflakes
-    for (let i = 0; i < snowflakeCount; i++) {
-        snowflakes.push({
-            x: Math.random() * canvas.width,
-            y: Math.random() * canvas.height,
-            radius: Math.random() * 3 + 1,
-            speed: Math.random() * 1 + 0.5,
-            drift: Math.random() * 0.5 - 0.25
-        });
-    }
-
-    function animateSnow() {
-        if (!document.getElementById('anime-section').classList.contains('active')) {
-            return; // Stop if section is not active
-        }
-
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        ctx.fillStyle = 'rgba(255, 255, 255, 0.8)';
-
-        snowflakes.forEach(flake => {
-            ctx.beginPath();
-            ctx.arc(flake.x, flake.y, flake.radius, 0, Math.PI * 2);
-            ctx.fill();
-
-            // Update position
-            flake.y += flake.speed;
-            flake.x += flake.drift;
-
-            // Reset if out of bounds
-            if (flake.y > canvas.height) {
-                flake.y = -10;
-                flake.x = Math.random() * canvas.width;
-            }
-            if (flake.x > canvas.width) flake.x = 0;
-            if (flake.x < 0) flake.x = canvas.width;
-        });
-
-        requestAnimationFrame(animateSnow);
-    }
-
-    animateSnow();
-}
-
-// Colorful Falling Hearts Animation
-function setupAnimeHearts() {
-    const canvas = document.getElementById('anime-hearts-canvas');
-    if (!canvas) return;
-
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-    const ctx = canvas.getContext('2d');
-
-    const hearts = [];
-    const heartCount = 35;
-    const heartEmojis = ['❤️', '💕', '💖', '💗', '💓', '💝', '💞', '💘', '💙', '💚', '💛', '🧡', '💜', '🤍', '🖤'];
-
-    // Create hearts
-    for (let i = 0; i < heartCount; i++) {
-        hearts.push({
-            x: Math.random() * canvas.width,
-            y: Math.random() * canvas.height - canvas.height,
-            size: Math.random() * 25 + 18,
-            speed: Math.random() * 2.5 + 1,
-            drift: (Math.random() - 0.5) * 3,
-            emoji: heartEmojis[Math.floor(Math.random() * heartEmojis.length)],
-            rotation: Math.random() * 360,
-            rotationSpeed: (Math.random() - 0.5) * 3,
-            opacity: Math.random() * 0.5 + 0.5
-        });
-    }
-
-    function animateHearts() {
-        if (!document.getElementById('anime-section').classList.contains('active')) {
-            return; // Stop if section is not active
-        }
-
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-        hearts.forEach(heart => {
-            ctx.save();
-            ctx.globalAlpha = heart.opacity;
-            ctx.translate(heart.x, heart.y);
-            ctx.rotate(heart.rotation * Math.PI / 180);
-            ctx.font = `${heart.size}px Arial`;
-            ctx.textAlign = 'center';
-            ctx.textBaseline = 'middle';
-            ctx.fillText(heart.emoji, 0, 0);
-            ctx.restore();
-
-            // Update position with wave motion
-            heart.y += heart.speed;
-            heart.x += Math.sin(heart.y * 0.015) * heart.drift;
-            heart.rotation += heart.rotationSpeed;
-
-            // Pulse opacity
-            heart.opacity = 0.5 + Math.sin(heart.y * 0.02) * 0.3;
-
-            // Reset if out of bounds
-            if (heart.y > canvas.height + 50) {
-                heart.y = -50;
-                heart.x = Math.random() * canvas.width;
-                heart.emoji = heartEmojis[Math.floor(Math.random() * heartEmojis.length)];
-            }
-        });
-
-        requestAnimationFrame(animateHearts);
-    }
-
-    animateHearts();
-}
-
 // TULIPS CSS & PARTICLES
-function initTulipAnimations() { }
+function initTulipAnimations() {
+    // Re-trigger animations by cloning and replacing the tulips section to restart CSS animations
+    const flowersContainer = document.querySelector('.flowers-container');
+    if (flowersContainer) {
+        const newContainer = flowersContainer.cloneNode(true);
+        flowersContainer.parentNode.replaceChild(newContainer, flowersContainer);
+    }
+}
 
 function startFallingPetals() {
     const container = document.getElementById('falling-container');
