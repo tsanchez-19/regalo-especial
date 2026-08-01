@@ -1,4 +1,4 @@
-﻿
+
 /* --- MAIN SCRIPT --- */
 
 // --- CONFIGURATION ---
@@ -122,6 +122,9 @@ function fadeInAudio() {
 
 // --- NAVIGATION SYSTEM ---
 function showNextButton(nextSectionId) {
+    // If next section is anime, we hide the universal button because the user can click the cat
+    if (nextSectionId === 'anime') return;
+
     // UNIVERSAL BUTTON LOGIC
     const btn = document.getElementById('universal-btn');
     if (!btn) {
@@ -140,11 +143,11 @@ function showNextButton(nextSectionId) {
 
         // Configure based on target
         if (nextSectionId === 'video') {
-            newBtn.textContent = '🎄';
-            newBtn.classList.add('tree-mode');
+            newBtn.textContent = '💖';
+            newBtn.classList.add('heart-mode');
         } else {
             newBtn.textContent = '>';
-            newBtn.classList.remove('tree-mode');
+            newBtn.classList.remove('heart-mode');
         }
 
         newBtn.onclick = () => {
@@ -190,7 +193,6 @@ function goToSection(id) {
         if (vid) {
             // VIDEO PLAYLIST CONFIGURATION
             const videoPlaylist = [
-                { src: 'video/memories.mp4', maxDuration: 9 },
                 { src: 'video/memories1.mp4', maxDuration: 9 },
                 { src: 'video/memories2.mp4', maxDuration: 5 },
                 { src: 'video/memories3.mp4', maxDuration: 9 },
@@ -208,45 +210,36 @@ function goToSection(id) {
                 vid.play().catch(e => console.log("Video Play Error", e));
             }
 
-            // Function to advance to next video
+            // Function to advance to next video or next section
             function nextVideo() {
-                currentVideoIndex = (currentVideoIndex + 1) % videoPlaylist.length;
+                currentVideoIndex++;
+                if (currentVideoIndex >= videoPlaylist.length) {
+                    if (!navTriggered) {
+                        navTriggered = true;
+                        goToSection('anime');
+                    }
+                    return;
+                }
                 loadVideo(currentVideoIndex);
             }
 
             // Time update handler - check if current video reached its max duration
             vid.ontimeupdate = () => {
                 const currentVideo = videoPlaylist[currentVideoIndex];
-                if (vid.currentTime >= currentVideo.maxDuration) {
+                if (currentVideo && vid.currentTime >= currentVideo.maxDuration) {
                     nextVideo();
-
-                    // Show Next button after first video completes
-                    if (!navTriggered) {
-                        navTriggered = true;
-                        showNextButton('anime');
-                    }
                 }
             };
 
             // Handle natural video end (if video is shorter than maxDuration)
             vid.onended = () => {
                 nextVideo();
-
-                if (!navTriggered) {
-                    navTriggered = true;
-                    showNextButton('anime');
-                }
             };
 
             // Error handler - try next video
             vid.onerror = (e) => {
                 console.error("Video error:", e);
                 nextVideo();
-
-                if (!navTriggered) {
-                    navTriggered = true;
-                    setTimeout(() => showNextButton('anime'), 3000);
-                }
             };
 
             // Custom Click Handler for play/pause

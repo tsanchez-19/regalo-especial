@@ -462,23 +462,32 @@ body {
     pointer-events: none;
 }
 
-/* Tree Button Variant - Christmas Style */
-.nav-btn.tree-mode {
-    background: linear-gradient(135deg, #165b33 0%, #0b3d1d 100%) !important;
-    border: 3px solid #ffd700 !important;
-    font-size: 3.5rem !important;
-    box-shadow: 0 0 25px rgba(255, 215, 0, 0.6), inset 0 0 10px rgba(255, 255, 255, 0.2) !important;
-    animation: bounce 2s infinite;
-    width: 90px;
-    height: 90px;
+/* Heart Button Variant - Romantic Style */
+.nav-btn.heart-mode {
+    background: linear-gradient(135deg, #ff0844 0%, #ffb199 100%) !important;
+    border: 2px solid #ffb199 !important;
+    font-size: 3rem !important;
+    box-shadow: 0 0 25px rgba(255, 8, 68, 0.6), inset 0 0 10px rgba(255, 255, 255, 0.4) !important;
+    animation: heartbeat 1.5s infinite;
+    width: 80px;
+    height: 80px;
     border-radius: 50%;
 }
 
-.nav-btn.tree-mode:hover {
-    transform: scale(1.1) rotate(5deg);
-    box-shadow: 0 0 40px rgba(255, 215, 0, 0.8) !important;
-    background: linear-gradient(135deg, #1e7e43 0%, #0f5229 100%) !important;
+.nav-btn.heart-mode:hover {
+    transform: scale(1.15);
+    box-shadow: 0 0 40px rgba(255, 8, 68, 0.9) !important;
+    background: linear-gradient(135deg, #ff1a55 0%, #ffb199 100%) !important;
     cursor: pointer;
+}
+
+@keyframes heartbeat {
+    0% { transform: scale(1); }
+    15% { transform: scale(1.15); }
+    30% { transform: scale(1); }
+    45% { transform: scale(1.15); }
+    60% { transform: scale(1); }
+    100% { transform: scale(1); }
 }
 
 /* --- VIDEO SECTION --- */
@@ -652,30 +661,88 @@ body {
     backdrop-filter: blur(2px);
 }
 
-/* --- THE BIG CHRISTMAS TREE (Pure CSS) --- */
-.christmas-tree-container {
+/* --- CUTE ORANGE CAT & PASTEL FLOWERS --- */
+.cat-girlfriend-container {
     position: absolute;
-    bottom: 0;
-    /* Anchored to bottom edge */
-    right: 1vw;
+    bottom: 2vh;
+    right: 5vw;
     z-index: 2005;
     pointer-events: none;
-    filter: drop-shadow(0 0 20px rgba(0, 0, 0, 0.8));
-    transform-origin: bottom center;
-    transform: scale(1.5);
-    /* Much Bigger */
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
+    width: 150px;
+    height: 150px;
+    transform: scale(1.2);
 }
 
-/* Responsive adjustment for tree */
-@media (min-width: 768px) {
-    .christmas-tree-container {
-        transform: scale(2.0);
-        /* Huge on desktop */
-        right: 5vw;
-        bottom: 2vh;
+.orange-cat-emoji {
+    font-size: 6rem;
+    filter: drop-shadow(0 0 15px rgba(255, 165, 0, 0.6));
+    animation: gentleSway 3s infinite ease-in-out;
+}
+
+.floating-heart,
+.floating-flower {
+    position: absolute;
+    font-size: 2rem;
+    opacity: 0;
+    animation: floatUpHearts 4s infinite ease-in-out;
+}
+
+.h1 {
+    left: 0%;
+    bottom: 40%;
+    animation-delay: 0s;
+    font-size: 1.8rem;
+}
+
+.h2 {
+    right: 0%;
+    bottom: 60%;
+    animation-delay: 1.5s;
+    font-size: 1.5rem;
+}
+
+.h3 {
+    left: 40%;
+    bottom: 80%;
+    animation-delay: 3s;
+    font-size: 2.2rem;
+}
+
+.f1 {
+    left: -10%;
+    bottom: 20%;
+    animation-delay: 0.5s;
+    font-size: 2.2rem;
+}
+
+.f2 {
+    right: -10%;
+    bottom: 30%;
+    animation-delay: 2s;
+    font-size: 1.8rem;
+}
+
+@keyframes floatUpHearts {
+    0% {
+        transform: translateY(0) scale(0.8);
+        opacity: 0;
+    }
+
+    20% {
+        opacity: 1;
+    }
+
+    80% {
+        opacity: 0.8;
+    }
+
+    100% {
+        transform: translateY(-100px) scale(1.2);
+        opacity: 0;
     }
 }
 
@@ -683,141 +750,35 @@ body {
 
     0%,
     100% {
-        transform: scale(1.5) rotate(0deg);
+        transform: rotate(-5deg);
     }
 
     50% {
-        transform: scale(1.5) rotate(2deg);
+        transform: rotate(5deg);
     }
 }
 
-@media (min-width: 768px) {
-    @keyframes gentleSway {
-
-        0%,
-        100% {
-            transform: scale(2.0) rotate(0deg);
-        }
-
-        50% {
-            transform: scale(2.0) rotate(2deg);
-        }
-    }
-}
-
-.tree-layer {
-    width: 0;
-    height: 0;
-    position: relative;
-    display: flex;
-    justify-content: center;
-}
-
-/* Top Layer */
-.tree-layer:nth-of-type(2) {
-    border-left: 40px solid transparent;
-    border-right: 40px solid transparent;
-    border-bottom: 50px solid #1e5c30;
-    z-index: 3;
-}
-
-/* Middle Layer */
-.tree-layer:nth-of-type(3) {
-    border-left: 60px solid transparent;
-    border-right: 60px solid transparent;
-    border-bottom: 70px solid #277a40;
-    margin-top: -25px;
-    /* Overlap */
-    z-index: 2;
-}
-
-/* Bottom Layer */
-.tree-layer:nth-of-type(4) {
-    border-left: 80px solid transparent;
-    border-right: 80px solid transparent;
-    border-bottom: 90px solid #2f9e52;
-    margin-top: -35px;
-    /* Overlap */
-    z-index: 1;
-}
-
-/* Star Position */
-.tree-star {
-    font-size: 3.5rem;
-    color: gold;
-    text-shadow: 0 0 10px yellow;
-    z-index: 4;
-    margin-bottom: -25px;
-    /* Sits lower on the peak */
-    position: relative;
-    top: 5px;
-    /* Animation removed as requested */
-}
-
-.tree-lights {
-    position: absolute;
-    width: 10px;
-    height: 10px;
-    background: red;
-    border-radius: 50%;
-    box-shadow: 0 0 5px red;
-    animation: blinkLights 1s infinite;
-}
-
-/* Random Light Positions */
-.l1 {
-    top: 30px;
-    left: -10px;
-    background: yellow;
-    box-shadow: 0 0 5px yellow;
-}
-
-.l2 {
-    top: 50px;
-    left: 15px;
-    background: cyan;
-    box-shadow: 0 0 5px cyan;
-    animation-delay: 0.3s;
-}
-
-.l3 {
-    top: 60px;
-    left: -25px;
-    background: magenta;
-    box-shadow: 0 0 5px magenta;
-    animation-delay: 0.7s;
-}
-
-@keyframes glowStar {
-    from {
-        text-shadow: 0 0 10px yellow;
+/* Responsive adjustment for video wrapper and cat */
+@media (max-width: 768px) {
+    .video-wrapper {
+        width: 95%;
+        padding: 15px 10px;
+        margin-top: 20px;
     }
 
-    to {
-        text-shadow: 0 0 30px orange;
-        transform: translateX(-50%) scale(1.2);
-    }
-}
-
-@keyframes blinkLights {
-
-    0%,
-    100% {
-        opacity: 1;
+    .video-title {
+        font-size: 1.4rem;
     }
 
-    50% {
-        opacity: 0.5;
+    .video-caption {
+        font-size: 1rem;
     }
-}
-}
-}
 
-font-size: 5rem;
-color: rgba(255, 255, 255, 0.5);
-z-index: 5;
-pointer-events: none;
-text-shadow: 0 0 20px black;
+    .cat-girlfriend-container {
+        transform: scale(0.9);
+        right: -10px;
+        bottom: 5vh;
+    }
 }
 
 .video-caption {
