@@ -1,0 +1,583 @@
+/* === ANIME SECTION - ATTACK ON TITAN THEME === */
+
+#anime-section {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #0a0e27 0%, #1a1a2e 50%, #16213e 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+/* Animated Snow Canvas */
+#anime-snow-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    pointer-events: none;
+}
+
+/* Back Button */
+.back-btn {
+    position: absolute;
+    top: 30px;
+    left: 30px;
+    z-index: 1000;
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    color: #fff;
+    padding: 12px 24px;
+    border-radius: 50px;
+    font-size: 1.1rem;
+    font-family: 'Outfit', sans-serif;
+    cursor: pointer;
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.back-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.5);
+    transform: translateX(-5px);
+    box-shadow: 0 6px 20px rgba(255, 255, 255, 0.2);
+}
+
+/* Main Container */
+.anime-container {
+    position: relative;
+    z-index: 10;
+    width: 90%;
+    max-width: 900px;
+    padding: 20px;
+    max-height: 90vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+/* Custom Scrollbar */
+.anime-container::-webkit-scrollbar {
+    width: 8px;
+}
+
+.anime-container::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+}
+
+.anime-container::-webkit-scrollbar-thumb {
+    background: rgba(255, 105, 180, 0.5);
+    border-radius: 10px;
+}
+
+.anime-container::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 105, 180, 0.8);
+}
+
+/* Anime Card */
+.anime-card {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(20px);
+    border-radius: 30px;
+    padding: 50px 40px;
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    position: relative;
+    overflow: hidden;
+}
+
+.anime-card::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.05) 0%, transparent 70%);
+    animation: shimmer 8s infinite;
+}
+
+@keyframes shimmer {
+
+    0%,
+    100% {
+        transform: translate(0, 0);
+    }
+
+    50% {
+        transform: translate(10%, 10%);
+    }
+}
+
+/* Card Header */
+.anime-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 40px;
+    position: relative;
+}
+
+.tulip-decoration {
+    font-size: 2.5rem;
+    animation: sway 3s ease-in-out infinite;
+}
+
+.tulip-decoration.left {
+    margin-right: 20px;
+    animation-delay: 0s;
+}
+
+.tulip-decoration.right {
+    margin-left: 20px;
+    animation-delay: 1.5s;
+}
+
+@keyframes sway {
+
+    0%,
+    100% {
+        transform: rotate(-5deg);
+    }
+
+    50% {
+        transform: rotate(5deg);
+    }
+}
+
+.anime-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.2rem;
+    color: #fff;
+    text-align: center;
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+    margin: 0;
+}
+
+/* Quote Box */
+.anime-quote-box {
+    position: relative;
+    background: rgba(138, 43, 226, 0.1);
+    border-left: 4px solid #8a2be2;
+    padding: 30px 40px;
+    margin: 30px 0;
+    border-radius: 15px;
+}
+
+.quote-icon {
+    font-size: 4rem;
+    color: #8a2be2;
+    font-family: Georgia, serif;
+    position: absolute;
+    top: -10px;
+    left: 10px;
+    opacity: 0.3;
+}
+
+.quote-icon.closing {
+    top: auto;
+    bottom: -30px;
+    left: auto;
+    right: 10px;
+}
+
+.anime-quote {
+    font-family: 'Outfit', sans-serif;
+    font-size: 1.5rem;
+    line-height: 1.8;
+    color: #e0e0e0;
+    text-align: center;
+    margin: 0;
+    position: relative;
+    z-index: 2;
+}
+
+.quote-highlight {
+    color: #ff69b4;
+    font-weight: 600;
+    text-shadow: 0 0 10px rgba(255, 105, 180, 0.5);
+}
+
+/* Character Images */
+.anime-characters {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+    margin: 40px 0;
+    flex-wrap: wrap;
+}
+
+.character-img {
+    text-align: center;
+    animation: floatChar 3s ease-in-out infinite;
+}
+
+.character-img img {
+    width: 180px;
+    height: auto;
+    filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.5));
+    transition: transform 0.3s ease;
+}
+
+.character-img:hover img {
+    transform: scale(1.1) rotate(5deg);
+}
+
+.char-label {
+    font-family: 'Outfit', sans-serif;
+    font-size: 1.2rem;
+    color: #ffd700;
+    margin-top: 15px;
+    font-weight: 600;
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+}
+
+.hearts-between {
+    font-size: 4rem;
+    animation: heartBeat 1.5s ease-in-out infinite;
+}
+
+@keyframes floatChar {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-15px);
+    }
+}
+
+@keyframes heartBeat {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.2);
+    }
+}
+
+/* Hearts Canvas */
+#anime-hearts-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    pointer-events: none;
+}
+
+/* Message Text */
+.anime-message {
+    margin-top: 30px;
+    padding: 25px;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.message-text {
+    font-family: 'Outfit', sans-serif;
+    font-size: 1.3rem;
+    color: #ffd700;
+    text-align: center;
+    line-height: 1.8;
+    font-style: italic;
+    margin: 0;
+}
+
+/* Floating Tulips - Full Screen */
+.floating-tulips {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: 5;
+}
+
+.tulip {
+    position: absolute;
+    font-size: 3rem;
+    animation: float 6s ease-in-out infinite;
+    filter: drop-shadow(0 0 10px rgba(255, 192, 203, 0.5));
+}
+
+.tulip.t1 {
+    top: 10%;
+    left: 5%;
+    animation-delay: 0s;
+}
+
+.tulip.t2 {
+    top: 20%;
+    right: 8%;
+    animation-delay: 1.5s;
+}
+
+.tulip.t3 {
+    bottom: 25%;
+    left: 10%;
+    animation-delay: 3s;
+}
+
+.tulip.t4 {
+    bottom: 15%;
+    right: 5%;
+    animation-delay: 4.5s;
+}
+
+.tulip.t5 {
+    top: 50%;
+    left: 15%;
+    animation-delay: 2s;
+}
+
+.tulip.t6 {
+    top: 60%;
+    right: 12%;
+    animation-delay: 3.5s;
+}
+
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translateY(0) rotate(0deg);
+    }
+
+    50% {
+        transform: translateY(-20px) rotate(10deg);
+    }
+}
+
+/* Christmas Ornaments - Full Screen */
+.christmas-ornaments {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: 6;
+}
+
+.ornament {
+    position: absolute;
+    font-size: 3.5rem;
+    animation: twinkle 3s ease-in-out infinite;
+    filter: drop-shadow(0 0 15px rgba(255, 215, 0, 0.6));
+}
+
+.ornament.o1 {
+    top: 8%;
+    right: 10%;
+    animation-delay: 0s;
+}
+
+.ornament.o2 {
+    top: 45%;
+    left: 5%;
+    animation-delay: 1s;
+}
+
+.ornament.o3 {
+    bottom: 12%;
+    right: 15%;
+    animation-delay: 2s;
+}
+
+.ornament.o4 {
+    top: 70%;
+    left: 20%;
+    animation-delay: 1.5s;
+}
+
+.ornament.o5 {
+    top: 25%;
+    right: 25%;
+    animation-delay: 2.5s;
+}
+
+@keyframes twinkle {
+
+    0%,
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 0.5;
+        transform: scale(1.2);
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    #anime-section {
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+
+    .anime-container {
+        width: 95%;
+        padding: 10px;
+        margin-top: 70px;
+        /* Space for back button */
+        max-height: calc(100vh - 80px);
+        overflow-y: auto;
+    }
+
+    .anime-card {
+        padding: 25px 15px;
+        margin-bottom: 20px;
+    }
+
+    .anime-card-header {
+        flex-direction: column;
+        gap: 10px;
+        margin-bottom: 25px;
+    }
+
+    .anime-title {
+        font-size: 1.3rem;
+        line-height: 1.5;
+        padding: 0 10px;
+    }
+
+    .tulip-decoration {
+        font-size: 1.8rem;
+    }
+
+    .tulip-decoration.left,
+    .tulip-decoration.right {
+        margin: 0;
+    }
+
+    .anime-intro-phrase {
+        margin: 15px 0;
+        padding: 15px 12px;
+    }
+
+    .anime-intro-phrase p {
+        font-size: 1rem;
+        line-height: 1.6;
+    }
+
+    .anime-quote-box {
+        padding: 20px 15px;
+        margin: 20px 0;
+    }
+
+    .anime-quote {
+        font-size: 1.05rem;
+        line-height: 1.7;
+    }
+
+    .quote-icon {
+        font-size: 3rem;
+    }
+
+    .anime-message {
+        margin-top: 25px;
+        padding: 20px 15px;
+    }
+
+    .message-text {
+        font-size: 1rem;
+        line-height: 1.7;
+    }
+
+    .back-btn {
+        top: 15px;
+        left: 15px;
+        padding: 10px 18px;
+        font-size: 0.95rem;
+        z-index: 1001;
+        position: fixed;
+    }
+
+    /* Characters - Stack vertically on mobile */
+    .anime-characters {
+        flex-direction: column;
+        gap: 30px;
+        margin: 30px 0;
+        align-items: center;
+    }
+
+    .character-img {
+        width: 100%;
+        max-width: 180px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .character-img img {
+        width: 140px;
+        height: auto;
+    }
+
+    .hearts-between {
+        font-size: 2.5rem;
+        margin: 10px 0;
+    }
+
+    .char-label {
+        font-size: 1.1rem;
+        margin-top: 12px;
+    }
+
+    /* Reduce floating decorations on mobile */
+    .floating-tulips .tulip,
+    .christmas-ornaments .ornament {
+        font-size: 1.5rem;
+    }
+
+    /* Hide some decorations on very small screens */
+    .floating-tulips .tulip.t3,
+    .floating-tulips .tulip.t4 {
+        display: none;
+    }
+}
+
+/* Intro Phrase Styling */
+.anime-intro-phrase {
+    text-align: center;
+    margin: 25px 0;
+    padding: 20px;
+    background: linear-gradient(135deg, rgba(255, 105, 180, 0.1), rgba(138, 43, 226, 0.1));
+    border-radius: 15px;
+    border: 1px solid rgba(255, 105, 180, 0.3);
+}
+
+.anime-intro-phrase p {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    color: #ffc0cb;
+    font-style: italic;
+    margin: 0;
+    line-height: 1.8;
+    text-shadow: 0 0 10px rgba(255, 192, 203, 0.3);
+}
+
+@media (max-width: 768px) {
+    .anime-intro-phrase p {
+        font-size: 1.1rem;
+    }
+}
